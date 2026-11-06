@@ -231,11 +231,6 @@ export default function App() {
   const [activeSlide, setActiveSlide] = useState(0);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [newsFilter, setNewsFilter] = useState('Todos');
-  // const [activeModal, setActiveModal] = useState<string | null>(null);
-  const [activeModal, setActiveModal] = useState(null);
-
-
-
 
   useEffect(() => {
     const timer = setInterval(() => {
@@ -282,7 +277,6 @@ export default function App() {
 
           <div className="flex items-center gap-4 lg:gap-5 font-medium">
             <button
-              onClick={() => setActiveModal('mesapartes')}
               className="hover:text-[#C5A059] transition-colors flex items-center gap-1"
             >
               <FileText className="w-3.5 h-3.5 text-[#C5A059]" />
@@ -290,7 +284,6 @@ export default function App() {
             </button>
             <span className="text-white/25">|</span>
             <button
-              onClick={() => setActiveModal('constancias')}
               className="hover:text-[#C5A059] transition-colors flex items-center gap-1"
             >
               <ShieldCheck className="w-3.5 h-3.5 text-[#C5A059]" />
@@ -298,7 +291,6 @@ export default function App() {
             </button>
             <span className="hidden sm:inline text-white/25">|</span>
             <button
-              onClick={() => setActiveModal('aulavirtual')}
               className="hidden sm:flex hover:text-[#C5A059] transition-colors items-center gap-1"
             >
               <GraduationCap className="w-3.5 h-3.5 text-[#C5A059]" />
@@ -356,7 +348,6 @@ export default function App() {
               <div className="h-6 w-px bg-slate-200 mx-1" />
 
               <button
-                onClick={() => setActiveModal('intranet')}
                 className="bg-[#003D73] hover:bg-[#002b52] text-white text-xs font-bold uppercase tracking-wider px-5 py-3 rounded-sm shadow-sm transition-all flex items-center gap-2 border-b-2 border-[#C5A059]"
               >
                 <UserCheck className="w-4 h-4 text-[#C5A059]" />
@@ -366,7 +357,6 @@ export default function App() {
 
             <div className="flex xl:hidden items-center gap-2">
               <button
-                onClick={() => setActiveModal('intranet')}
                 className="bg-[#003D73] text-white text-xs font-semibold px-3 py-2 rounded-sm"
               >
                 SIGERQF
@@ -454,21 +444,21 @@ export default function App() {
               </p>
 
               <div className="flex flex-wrap items-center gap-4">
-                <button
-                  onClick={() => setActiveModal('admision2026')}
+                <a
+                  href="#admision"
                   className="bg-[#C5A059] hover:bg-[#b38e47] text-[#0F172A] font-bold text-sm sm:text-base px-7 py-4 rounded-sm shadow-md transition-all flex items-center gap-3 group"
                 >
                   <span>Proceso de Admisión 2026</span>
                   <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
-                </button>
+                </a>
 
-                <button
-                  onClick={() => setActiveModal('cronograma')}
+                <a
+                  href="#admision"
                   className="bg-white/10 hover:bg-white/20 text-white border border-white/40 font-semibold text-sm sm:text-base px-6 py-4 rounded-sm backdrop-blur-sm transition-all flex items-center gap-2.5"
                 >
                   <Download className="w-4 h-4 text-[#C5A059]" />
                   <span>{HERO_SLIDES[activeSlide].ctaSecondary}</span>
-                </button>
+                </a>
               </div>
 
               <div className="mt-10 pt-6 border-t border-white/15 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
@@ -554,13 +544,13 @@ export default function App() {
                   <span className="text-xs font-medium text-slate-500">
                     Total Plazas Habilitadas: <strong className="text-[#003D73]">245</strong>
                   </span>
-                  <button
-                    onClick={() => setActiveModal('admision2026')}
+                  <a
+                    href="#admision"
                     className="text-xs font-bold text-[#003D73] hover:text-[#C5A059] flex items-center gap-1 transition-colors"
                   >
                     <span>Ver cuadro de vacantes</span>
                     <ChevronRight className="w-3.5 h-3.5" />
-                  </button>
+                  </a>
                 </div>
               </div>
             </div>
@@ -603,7 +593,6 @@ export default function App() {
                       {card.stats}
                     </span>
                     <button
-                      onClick={() => setActiveModal(card.id)}
                       className="inline-flex items-center gap-1.5 text-sm font-bold text-[#003D73] group-hover:text-[#C5A059] transition-colors"
                     >
                       <span>{card.linkText}</span>
@@ -621,33 +610,28 @@ export default function App() {
                 {
                   title: 'Padrones de Postulantes',
                   subtitle: 'Consulta de aptos y sedes de evaluación',
-                  icon: FileCheck,
-                  modal: 'padrones'
+                  icon: FileCheck
                 },
                 {
                   title: 'Registro de Especialistas',
                   subtitle: 'Directorio nacional de egresados RQF',
-                  icon: Award,
-                  modal: 'registro'
+                  icon: Award
                 },
                 {
                   title: 'Sedes Docentes Acreditadas',
                   subtitle: 'Hospitales e Institutos MINSA / EsSalud',
-                  icon: Building2,
-                  modal: 'sedes'
+                  icon: Building2
                 },
                 {
                   title: 'Repositorio de Actas',
                   subtitle: 'Sesiones del Comité Nacional y Directivo',
-                  icon: BookOpen,
-                  modal: 'actas'
+                  icon: BookOpen
                 }
               ].map((service, idx) => {
                 const SIcon = service.icon;
                 return (
-                  <button
+                  <div
                     key={service.title}
-                    onClick={() => setActiveModal(service.modal)}
                     className={`flex items-center gap-3.5 text-left group pt-3 sm:pt-0 ${idx > 0 ? 'sm:pl-5' : ''
                       }`}
                   >
@@ -660,7 +644,7 @@ export default function App() {
                       </h4>
                       <p className="text-xs text-slate-500">{service.subtitle}</p>
                     </div>
-                  </button>
+                  </div>
                 );
               })}
             </div>
@@ -793,8 +777,7 @@ export default function App() {
             {PUBLICATIONS.map((pub) => (
               <div
                 key={pub.id}
-                onClick={() => setActiveModal('publicacion')}
-                className="group relative h-[410px] rounded-sm overflow-hidden shadow-md cursor-pointer border border-slate-200 bg-[#003D73]"
+                className="group relative h-[410px] rounded-sm overflow-hidden shadow-md border border-slate-200 bg-[#003D73]"
               >
                 <img
                   src={pub.image}
@@ -875,20 +858,19 @@ export default function App() {
                     Presidente del Comité Nacional del Residentado Químico Farmacéutico
                   </p>
                 </div>
-                <button
-                  onClick={() => setActiveModal('video')}
+                <a
+                  href="#quienes-somos"
                   className="text-xs font-bold text-[#C5A059] hover:underline flex items-center gap-1"
                 >
                   <span>Leer mensaje íntegro</span>
                   <ChevronRight className="w-4 h-4" />
-                </button>
+                </a>
               </div>
             </div>
 
             <div className="lg:col-span-6">
               <div
-                onClick={() => setActiveModal('video')}
-                className="relative h-[320px] sm:h-[380px] w-full rounded-sm overflow-hidden shadow-2xl border-2 border-white/15 group cursor-pointer"
+                className="relative h-[320px] sm:h-[380px] w-full rounded-sm overflow-hidden shadow-2xl border-2 border-white/15 group"
               >
                 <img
                   src="https://images.unsplash.com/photo-1540575467063-178a50c2df87?auto=format&fit=crop&w=1400&q=85"
@@ -977,7 +959,6 @@ export default function App() {
                     Publicado por: {featuredNews.author}
                   </span>
                   <button
-                    onClick={() => setActiveModal('comunicado')}
                     className="text-xs sm:text-sm font-bold text-[#003D73] hover:text-[#C5A059] flex items-center gap-1.5 transition-colors"
                   >
                     <span>Leer comunicado completo</span>
@@ -992,8 +973,7 @@ export default function App() {
                 {filteredSideNews.map((item) => (
                   <div
                     key={item.id}
-                    onClick={() => setActiveModal('comunicado')}
-                    className="bg-white border border-slate-200 hover:border-[#C5A059] rounded-sm shadow-sm p-4 flex flex-col sm:flex-row gap-4 cursor-pointer transition-all group"
+                    className="bg-white border border-slate-200 hover:border-[#C5A059] rounded-sm shadow-sm p-4 flex flex-col sm:flex-row gap-4 transition-all group"
                   >
                     <div className="w-full sm:w-36 h-36 sm:h-28 rounded-sm overflow-hidden shrink-0 bg-slate-100">
                       <img
@@ -1034,7 +1014,6 @@ export default function App() {
                   instalación.
                 </p>
                 <button
-                  onClick={() => setActiveModal('normativas')}
                   className="w-full bg-[#003D73] hover:bg-[#002b52] text-white text-xs font-bold py-2.5 px-4 rounded-sm transition-colors flex items-center justify-center gap-2"
                 >
                   <Search className="w-3.5 h-3.5 text-[#C5A059]" />
@@ -1102,7 +1081,6 @@ export default function App() {
 
               <div className="pt-2">
                 <button
-                  onClick={() => setActiveModal('reclamaciones')}
                   className="inline-flex items-center gap-2.5 bg-white/10 hover:bg-white/15 border border-white/20 px-4 py-2.5 rounded-sm text-xs font-semibold text-white transition-colors"
                 >
                   <BookOpen className="w-4 h-4 text-[#C5A059]" />
@@ -1130,29 +1108,29 @@ export default function App() {
               </h4>
               <ul className="space-y-2 text-xs sm:text-sm text-slate-200">
                 <li>
-                  <button onClick={() => setActiveModal('cronograma')} className="hover:text-[#C5A059] transition-colors text-left">
+                  <a href="#admision" className="hover:text-[#C5A059] transition-colors text-left block">
                     Cronograma Oficial 2026
-                  </button>
+                  </a>
                 </li>
                 <li>
-                  <button onClick={() => setActiveModal('admision2026')} className="hover:text-[#C5A059] transition-colors text-left">
+                  <a href="#admision" className="hover:text-[#C5A059] transition-colors text-left block">
                     Cuadro General de Plazas Vacantes
-                  </button>
+                  </a>
                 </li>
                 <li>
-                  <button onClick={() => setActiveModal('perfiles')} className="hover:text-[#C5A059] transition-colors text-left">
+                  <a href="#admision" className="hover:text-[#C5A059] transition-colors text-left block">
                     Perfiles de Especialidades RQF
-                  </button>
+                  </a>
                 </li>
                 <li>
-                  <button onClick={() => setActiveModal('intranet')} className="hover:text-[#C5A059] transition-colors text-left">
+                  <a href="#admision" className="hover:text-[#C5A059] transition-colors text-left block">
                     Inscripción en Línea (SIGERQF)
-                  </button>
+                  </a>
                 </li>
                 <li>
-                  <button onClick={() => setActiveModal('constancias')} className="hover:text-[#C5A059] transition-colors text-left">
+                  <a href="#admision" className="hover:text-[#C5A059] transition-colors text-left block">
                     Verificación de Constancias
-                  </button>
+                  </a>
                 </li>
               </ul>
             </div>
@@ -1200,69 +1178,6 @@ export default function App() {
           </div>
         </div>
       </footer>
-
-      {/* MODAL */}
-
-
-      {/* {activeModal && (
-        <div className="fixed inset-0 z-50 bg-[#0F172A]/75 backdrop-blur-xs flex items-center justify-center p-4">
-          <div className="bg-white rounded-sm max-w-xl w-full shadow-2xl border-t-4 border-[#C5A059] overflow-hidden animate-in fade-in zoom-in-95 duration-200">
-            <div className="bg-[#003D73] text-white px-6 py-4 flex items-center justify-between">
-              <div className="flex items-center gap-2.5">
-                <Landmark className="w-5 h-5 text-[#C5A059]" />
-                <h3 className="text-base font-bold tracking-tight">
-                  Plataforma Digital CONAREQF • Información Oficial
-                </h3>
-              </div>
-              <button
-                onClick={() => setActiveModal(null)}
-                className="text-white/80 hover:text-white p-1"
-                aria-label="Cerrar ventana"
-              >
-                <X className="w-5 h-5" />
-              </button>
-            </div>
-
-            <div className="p-6 space-y-4 text-sm text-[#334155]">
-              <div className="bg-[#F8FAFC] border-l-4 border-[#003D73] p-4 rounded-sm">
-                <p className="text-xs font-bold uppercase tracking-wider text-[#003D73] mb-1">
-                  MÓDULO SELECCIONADO: {activeModal.toUpperCase()}
-                </p>
-                <p className="text-sm text-[#334155]">
-                  Este módulo forma parte de la arquitectura institucional del portal CONAREQF.
-                </p>
-              </div>
-
-              <div className="space-y-2 text-xs sm:text-sm">
-                <p className="font-semibold text-[#0F172A]">
-                  Detalles del servicio habilitado:
-                </p>
-                <ul className="list-disc pl-5 space-y-1 text-[#334155]">
-                  <li>Acceso seguro mediante validación de DNI / Colegiatura CQFP.</li>
-                  <li>Descarga de resoluciones y anexos en formato PDF con firma digital.</li>
-                  <li>Soporte técnico en línea de lunes a viernes (08:30 a.m. - 05:00 p.m.).</li>
-                </ul>
-              </div>
-            </div>
-
-            <div className="bg-[#F8FAFC] px-6 py-4 border-t border-slate-200 flex justify-end gap-3">
-              <button
-                onClick={() => setActiveModal(null)}
-                className="px-4 py-2 text-xs font-bold uppercase tracking-wider text-[#334155] border border-slate-300 rounded-sm hover:bg-slate-100"
-              >
-                Cerrar
-              </button>
-              <button
-                onClick={() => setActiveModal(null)}
-                className="px-5 py-2 text-xs font-bold uppercase tracking-wider bg-[#003D73] text-white rounded-sm hover:bg-[#002b52]"
-              >
-                Continuar al Documento
-              </button>
-            </div>
-          </div>
-        </div>
-      )} */}
-
     </div>
   );
 }

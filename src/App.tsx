@@ -282,7 +282,7 @@ export default function App() {
               className="hover:text-[#C5A059] transition-colors flex items-center gap-1"
             >
               <FileText className="w-3.5 h-3.5 text-[#C5A059]" />
-              <span>Mesa de Partes Virtual</span>
+              <span>#</span>
             </button>
             <span className="text-white/25">|</span>
             <button
@@ -290,7 +290,7 @@ export default function App() {
               className="hover:text-[#C5A059] transition-colors flex items-center gap-1"
             >
               <ShieldCheck className="w-3.5 h-3.5 text-[#C5A059]" />
-              <span>Verificar Constancia</span>
+              <span>#</span>
             </button>
             <span className="hidden sm:inline text-white/25">|</span>
             <button
@@ -298,7 +298,7 @@ export default function App() {
               className="hidden sm:flex hover:text-[#C5A059] transition-colors items-center gap-1"
             >
               <GraduationCap className="w-3.5 h-3.5 text-[#C5A059]" />
-              <span>Aula Virtual</span>
+              <span>A#</span>
             </button>
           </div>
         </div>
@@ -356,7 +356,7 @@ export default function App() {
                 className="bg-[#003D73] hover:bg-[#002b52] text-white text-xs font-bold uppercase tracking-wider px-5 py-3 rounded-sm shadow-sm transition-all flex items-center gap-2 border-b-2 border-[#C5A059]"
               >
                 <UserCheck className="w-4 h-4 text-[#C5A059]" />
-                <span>Sistema SIGERQF</span>
+                <span>Boton #</span>
               </button>
             </nav>
 
@@ -479,8 +479,8 @@ export default function App() {
                       key={s.id}
                       onClick={() => setActiveSlide(idx)}
                       className={`h-2.5 transition-all rounded-sm ${idx === activeSlide
-                          ? 'w-9 bg-[#C5A059]'
-                          : 'w-2.5 bg-white/40 hover:bg-white/70'
+                        ? 'w-9 bg-[#C5A059]'
+                        : 'w-2.5 bg-white/40 hover:bg-white/70'
                         }`}
                       aria-label={`Ver imagen ${idx + 1}`}
                     />
@@ -925,8 +925,8 @@ export default function App() {
                   key={tab}
                   onClick={() => setNewsFilter(tab)}
                   className={`px-4 py-2 text-xs font-bold uppercase tracking-wider rounded-sm border transition-all ${newsFilter === tab
-                      ? 'bg-[#003D73] text-white border-[#003D73]'
-                      : 'bg-[#F8FAFC] text-[#334155] border-slate-200 hover:border-[#C5A059]'
+                    ? 'bg-[#003D73] text-white border-[#003D73]'
+                    : 'bg-[#F8FAFC] text-[#334155] border-slate-200 hover:border-[#C5A059]'
                     }`}
                 >
                   {tab}
@@ -1168,8 +1168,8 @@ export default function App() {
                 </li>
                 <li className="flex items-center gap-2.5">
                   <Mail className="w-4 h-4 text-[#C5A059] shrink-0" />
-                  <a href="mailto:informes@conareqf.org.pe" className="hover:text-[#C5A059] transition-colors underline">
-                    informes@conareqf.org.pe
+                  <a href="mailto:informes@conareqf.com.pe" className="hover:text-[#C5A059] transition-colors underline">
+                    informes@conareqf.com.pe
                   </a>
                 </li>
                 <li className="flex items-center gap-2.5">
@@ -1198,7 +1198,8 @@ export default function App() {
       </footer>
 
       {/* MODAL */}
-      {activeModal && (
+      {/* 
+            {activeModal && (
         <div className="fixed inset-0 z-50 bg-[#0F172A]/75 backdrop-blur-xs flex items-center justify-center p-4">
           <div className="bg-white rounded-sm max-w-xl w-full shadow-2xl border-t-4 border-[#C5A059] overflow-hidden animate-in fade-in zoom-in-95 duration-200">
             <div className="bg-[#003D73] text-white px-6 py-4 flex items-center justify-between">
@@ -1256,6 +1257,13 @@ export default function App() {
           </div>
         </div>
       )}
+           
+      
+      
+      */}
+
+
+
     </div>
   );
 }

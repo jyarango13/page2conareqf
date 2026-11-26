@@ -23,13 +23,18 @@ import {
   Scale,
   GraduationCap,
   Microscope,
-  FileCheck,
-  Landmark
+  FileCheck
 } from 'lucide-react';
 
 // ==========================================
 // DATOS INSTITUCIONALES Y CONTENIDO (CMS MOCK)
 // ==========================================
+
+const SITE_ASSETS = {
+  logo: '/logo-conareqf.svg',
+  favicon: '/conareqf-ico.ico',
+  logoAlt: 'Logo oficial del CONAREQF'
+} as const;
 
 const HERO_SLIDES = [
   {
@@ -231,6 +236,7 @@ export default function App() {
   const [activeSlide, setActiveSlide] = useState(0);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [newsFilter, setNewsFilter] = useState('Todos');
+  const [showConstructionModal, setShowConstructionModal] = useState(true);
 
   useEffect(() => {
     const timer = setInterval(() => {
@@ -238,6 +244,15 @@ export default function App() {
     }, 9000);
     return () => clearInterval(timer);
   }, []);
+
+  useEffect(() => {
+    if (!showConstructionModal) return;
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') setShowConstructionModal(false);
+    };
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [showConstructionModal]);
 
   const filteredSideNews = NEWS_DATA.filter((item) => {
     if (item.featured) return false;
@@ -252,21 +267,96 @@ export default function App() {
 
 
     <div className="min-h-screen bg-white text-[#334155] font-sans antialiased selection:bg-[#003D73] selection:text-white">
+      {/* POPUP DE AVISO: PÁGINA WEB EN CONSTRUCCIÓN */}
+      {showConstructionModal && (
+        <div
+          className="fixed inset-0 z-[100] flex items-center justify-center p-3 sm:p-4 bg-[#001d38]/80 backdrop-blur-sm"
+          role="dialog"
+          aria-modal="true"
+          aria-labelledby="construction-modal-title"
+          onClick={() => setShowConstructionModal(false)}
+        >
+          <div
+            className="relative w-full max-w-lg max-h-[90vh] overflow-y-auto bg-white rounded-sm shadow-2xl border-t-4 border-[#C5A059]"
+            onClick={(e) => e.stopPropagation()}
+          >
+            {/* Cabecera Institucional */}
+            <div className="bg-[#003D73] text-white px-5 py-4 sm:px-6 sm:py-5 flex items-start justify-between gap-3">
+              <div className="min-w-0">
+                <span className="inline-flex items-center gap-1.5 text-[10px] sm:text-[11px] font-bold uppercase tracking-widest text-[#C5A059]">
+                  <Clock className="w-3.5 h-3.5 shrink-0" />
+                  <span>COMUNICADO INSTITUCIONAL • CONAREQF</span>
+                </span>
+                <h2
+                  id="construction-modal-title"
+                  className="text-lg sm:text-2xl font-extrabold tracking-tight mt-1"
+                >
+                  Página Web en Construcción
+                </h2>
+              </div>
+              <button
+                type="button"
+                onClick={() => setShowConstructionModal(false)}
+                className="p-1.5 text-slate-300 hover:text-white hover:bg-white/10 rounded-sm transition-colors shrink-0"
+                aria-label="Cerrar aviso"
+              >
+                <X className="w-5 h-5" />
+              </button>
+            </div>
+
+            {/* Cuerpo del Aviso */}
+            <div className="p-5 sm:p-7 space-y-5">
+              <p className="text-sm sm:text-base text-[#334155] leading-relaxed">
+                Nos encontramos trabajando en la actualización y mejora integral de nuestro portal web institucional (<strong className="text-[#003D73]">conareqf.pe</strong>) para brindarle un mejor servicio digital.
+              </p>
+
+              {/* Barra de progreso visual */}
+              <div className="bg-[#F8FAFC] border border-slate-200 p-4 rounded-sm space-y-2.5">
+                <div className="flex items-center justify-between text-xs font-bold gap-2">
+                  <span className="text-[#003D73] uppercase tracking-wider">
+                    Estado del Desarrollo
+                  </span>
+                  <span className="text-[#b38e47] shrink-0">En implementación</span>
+                </div>
+                <div className="w-full h-2 bg-slate-200 rounded-full overflow-hidden">
+                  <div className="h-full w-3/4 bg-gradient-to-r from-[#003D73] to-[#C5A059] rounded-full" />
+                </div>
+                <p className="text-xs text-slate-500">
+                  El marco normativo y la información institucional del portal continúan disponibles.
+                </p>
+              </div>
+
+              {/* Acciones */}
+              <div className="pt-1 flex flex-col-reverse sm:flex-row items-stretch sm:items-center justify-end gap-2.5 sm:gap-3">
+                <button
+                  type="button"
+                  onClick={() => setShowConstructionModal(false)}
+                  className="inline-flex items-center justify-center gap-2 px-5 py-2.5 text-xs sm:text-sm font-bold text-white bg-[#003D73] hover:bg-[#002d56] border-b-2 border-[#C5A059] rounded-sm shadow-sm transition-colors cursor-pointer"
+                >
+                  <span>Entendido, ingresar al portal</span>
+                  <ArrowRight className="w-4 h-4" />
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+
       {/* 1. TOPBAR INSTITUCIONAL */}
       <div className="bg-[#003D73] text-white border-b border-white/10 text-xs">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-2.5 flex flex-col md:flex-row justify-between items-center gap-2">
           <div className="flex flex-wrap items-center justify-center md:justify-start gap-4 lg:gap-6 text-slate-200">
             <span className="flex items-center gap-1.5">
               <Phone className="w-3.5 h-3.5 text-[#C5A059]" />
-              <span>Central: (01) 422-8910 / Anexo 104</span>
+              <span>Central:</span>
             </span>
             <span className="hidden sm:inline text-white/25">|</span>
             <a
-              href="mailto:informes@conareqf.com.pe"
+              href="https://conareqf.pe"
               className="flex items-center gap-1.5 hover:text-[#C5A059] transition-colors"
             >
               <Mail className="w-3.5 h-3.5 text-[#C5A059]" />
-              <span>informes@conareqf.com.pe</span>
+              <span>conareqf.pe</span>
             </a>
             <span className="hidden lg:inline text-white/25">|</span>
             <span className="hidden lg:flex items-center gap-1.5">
@@ -305,12 +395,11 @@ export default function App() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-20 lg:h-24">
             <a href="#inicio" className="flex items-center gap-3.5 group">
-              <div className="w-12 h-12 lg:w-14 lg:h-14 bg-[#003D73] rounded-sm flex flex-col items-center justify-center border-2 border-[#C5A059] shadow-sm shrink-0">
-                <Landmark className="w-6 h-6 lg:w-7 lg:h-7 text-[#C5A059]" />
-                <span className="text-[8px] font-bold tracking-widest text-white mt-0.5">
-                  PERÚ
-                </span>
-              </div>
+              <img
+                src={SITE_ASSETS.logo}
+                alt={SITE_ASSETS.logoAlt}
+                className="w-12 h-12 lg:w-14 lg:h-14 object-contain shrink-0"
+              />
               <div className="flex flex-col">
                 <div className="flex items-center gap-2">
                   <span className="text-xl lg:text-2xl font-extrabold tracking-tight text-[#003D73]">
@@ -488,53 +577,40 @@ export default function App() {
                 <div className="flex items-center justify-between border-b border-slate-200 pb-4 mb-5">
                   <div>
                     <span className="text-[11px] font-bold uppercase tracking-wider text-[#C5A059] block">
-                      CONVOCATORIA NACIONAL
+                      AVISO INSTITUCIONAL
                     </span>
                     <h2 className="text-lg font-extrabold text-[#003D73]">
-                      Hitos de Admisión 2026
+                      Página Web en Construcción
                     </h2>
                   </div>
-                  <span className="bg-[#003D73] text-white text-xs font-bold px-2.5 py-1 rounded-sm">
-                    EN CURSO
+                  <span className="bg-[#003D73] text-white text-xs font-bold px-2.5 py-1 rounded-sm shrink-0">
+                    EN DESARROLLO
                   </span>
                 </div>
 
                 <div className="space-y-4 text-xs sm:text-sm">
-                  <div className="flex items-start gap-3.5 p-2.5 bg-[#F8FAFC] border-l-2 border-[#003D73] rounded-sm">
-                    <CheckCircle2 className="w-4 h-4 text-[#003D73] shrink-0 mt-0.5" />
-                    <div className="flex-1">
-                      <div className="flex justify-between font-bold text-[#0F172A]">
-                        <span>Publicación de Plazas</span>
-                        <span className="text-[#003D73]">02 NOV</span>
-                      </div>
-                      <p className="text-xs text-slate-500 mt-0.5">
-                        Cuadro general por universidades y sedes
-                      </p>
-                    </div>
-                  </div>
-
                   <div className="flex items-start gap-3.5 p-2.5 bg-[#F8FAFC] border-l-2 border-[#C5A059] rounded-sm">
                     <Clock className="w-4 h-4 text-[#C5A059] shrink-0 mt-0.5" />
                     <div className="flex-1">
                       <div className="flex justify-between font-bold text-[#0F172A]">
-                        <span>Inscripción de Postulantes</span>
-                        <span className="text-[#b38e47]">05 - 22 NOV</span>
+                        <span>Portal Informativo</span>
+                        <span className="text-[#b38e47]">EN PROGRESO</span>
                       </div>
                       <p className="text-xs text-slate-500 mt-0.5">
-                        Registro digital en plataforma SIGERQF
+                        Actualización de contenidos y marco normativo institucional
                       </p>
                     </div>
                   </div>
 
                   <div className="flex items-start gap-3.5 p-2.5 bg-[#F8FAFC] border-l-2 border-slate-300 rounded-sm">
-                    <Award className="w-4 h-4 text-slate-600 shrink-0 mt-0.5" />
+                    <ShieldCheck className="w-4 h-4 text-slate-600 shrink-0 mt-0.5" />
                     <div className="flex-1">
                       <div className="flex justify-between font-bold text-[#0F172A]">
-                        <span>Examen Único Nacional</span>
-                        <span className="text-slate-700">29 NOV 2026</span>
+                        <span>Lanzamiento Oficial</span>
+                        <span className="text-slate-700">PRÓXIMAMENTE</span>
                       </div>
                       <p className="text-xs text-slate-500 mt-0.5">
-                        Evaluación presencial descentralizada
+                        Nueva experiencia web para postulantes y residentes
                       </p>
                     </div>
                   </div>
@@ -542,13 +618,13 @@ export default function App() {
 
                 <div className="mt-6 pt-4 border-t border-slate-200 flex items-center justify-between">
                   <span className="text-xs font-medium text-slate-500">
-                    Total Plazas Habilitadas: <strong className="text-[#003D73]">245</strong>
+                    Estado: <strong className="text-[#003D73]">Actualización continua</strong>
                   </span>
                   <a
-                    href="#admision"
+                    href="#contacto"
                     className="text-xs font-bold text-[#003D73] hover:text-[#C5A059] flex items-center gap-1 transition-colors"
                   >
-                    <span>Ver cuadro de vacantes</span>
+                    <span>Canales de contacto</span>
                     <ChevronRight className="w-3.5 h-3.5" />
                   </a>
                 </div>
@@ -662,7 +738,7 @@ export default function App() {
             <h2 className="text-3xl sm:text-4xl font-extrabold text-[#003D73] tracking-tight">
               Quiénes Somos
             </h2>
-            <div className="w-20 h-1 bg-[#C5A059] mx-auto mt-4 mb-6" />
+
             <p className="text-base sm:text-lg text-[#334155] leading-relaxed font-normal">
               El Comité Nacional del Residentado Químico Farmacéutico (CONAREQF) es el máximo
               órgano colegiado del Estado peruano encargado de normar, planificar, conducir y
@@ -670,360 +746,12 @@ export default function App() {
               ciencias farmacéuticas, garantizando estándares de excelencia clínica, científica y
               ética al servicio del Sistema Nacional de Salud.
             </p>
-          </div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-center">
-            <div className="lg:col-span-7 relative">
-              <div className="relative h-[380px] sm:h-[460px] w-full rounded-sm overflow-hidden shadow-md border border-slate-200">
-                <img
-                  src="https://images.unsplash.com/photo-1582719508461-905c673771fd?auto=format&fit=crop&w=1400&q=85"
-                  alt="Especialistas del Residentado Químico Farmacéutico en entorno clínico hospitalario"
-                  className="w-full h-full object-cover"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-[#003D73]/80 via-transparent to-transparent" />
-                <div className="absolute bottom-5 left-5 right-5 sm:right-auto bg-[#003D73]/95 backdrop-blur-sm text-white p-5 rounded-sm border-l-4 border-[#C5A059] max-w-md shadow-lg">
-                  <p className="text-xs uppercase tracking-widest text-[#C5A059] font-bold mb-1">
-                    ARTICULACIÓN DOCENCIA - SERVICIO
-                  </p>
-                  <p className="text-sm font-medium leading-snug">
-                    Formación presencial intensiva e integral en institutos especializados y
-                    hospitales nacionales nivel III-1 y III-2.
-                  </p>
-                </div>
-              </div>
-            </div>
-
-            <div className="lg:col-span-5 space-y-6">
-              <div className="inline-block bg-[#F8FAFC] border border-slate-200 px-3 py-1 rounded-sm text-xs font-bold text-[#003D73]">
-                MISIÓN REGULADORA Y ACADÉMICA
-              </div>
-
-              <h3 className="text-2xl font-bold text-[#003D73] leading-snug">
-                Fortaleciendo la presencia del Químico Farmacéutico Especialista en la alta
-                complejidad hospitalaria
-              </h3>
-
-              <p className="text-sm sm:text-base text-[#334155] leading-relaxed">
-                En cumplimiento de su marco normativo, el CONAREQF coordina de manera permanente con
-                el Ministerio de Salud, EsSalud, las Sanidades de las Fuerzas Armadas y Policiales,
-                el Colegio Químico Farmacéutico del Perú y las universidades licenciadas para
-                acreditar programas y campos clínicos de segunda especialidad.
-              </p>
-
-              <div className="space-y-3 pt-2">
-                {[
-                  'Acreditación periódica de sedes docentes hospitalarias e institutos especializados.',
-                  'Conducción transparente del Concurso Nacional de Admisión y Examen Único.',
-                  'Definición de estándares curriculares y perfiles de competencias por especialidad.'
-                ].map((point) => (
-                  <div key={point} className="flex items-start gap-3">
-                    <CheckCircle2 className="w-5 h-5 text-[#C5A059] shrink-0 mt-0.5" />
-                    <span className="text-sm font-medium text-[#334155]">{point}</span>
-                  </div>
-                ))}
-              </div>
-
-              <div className="grid grid-cols-3 gap-3 pt-4 border-t border-slate-200">
-                <div className="bg-[#F8FAFC] p-4 rounded-sm border-t-2 border-[#003D73]">
-                  <span className="block text-2xl sm:text-3xl font-extrabold text-[#003D73]">
-                    +18
-                  </span>
-                  <span className="text-xs text-[#334155] font-medium">
-                    Universidades Integrantes
-                  </span>
-                </div>
-                <div className="bg-[#F8FAFC] p-4 rounded-sm border-t-2 border-[#C5A059]">
-                  <span className="block text-2xl sm:text-3xl font-extrabold text-[#003D73]">
-                    +45
-                  </span>
-                  <span className="text-xs text-[#334155] font-medium">
-                    Sedes Hospitalarias
-                  </span>
-                </div>
-                <div className="bg-[#F8FAFC] p-4 rounded-sm border-t-2 border-[#003D73]">
-                  <span className="block text-2xl sm:text-3xl font-extrabold text-[#003D73]">
-                    06
-                  </span>
-                  <span className="text-xs text-[#334155] font-medium">
-                    Áreas de Especialidad
-                  </span>
-                </div>
-              </div>
-            </div>
           </div>
         </div>
       </section>
 
-      {/* 6. PUBLICACIONES Y DOCUMENTOS DESTACADOS */}
-      <section id="publicaciones" className="py-20 bg-[#F8FAFC] border-y border-slate-200">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-4">
-            <div>
-              <span className="text-xs font-bold uppercase tracking-widest text-[#C5A059] block mb-2">
-                BIBLIOTECA Y REPOSITORIO TÉCNICO
-              </span>
-              <h2 className="text-3xl font-extrabold text-[#003D73] tracking-tight">
-                Publicaciones y Documentos Destacados
-              </h2>
-              <div className="w-20 h-1 bg-[#C5A059] mt-3" />
-            </div>
-            <p className="text-sm text-[#334155] max-w-md">
-              Acceda a los documentos normativos, guías de acreditación y reportes estadísticos de
-              distribución nacional con formato visual editorial.
-            </p>
-          </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {PUBLICATIONS.map((pub) => (
-              <div
-                key={pub.id}
-                className="group relative h-[410px] rounded-sm overflow-hidden shadow-md border border-slate-200 bg-[#003D73]"
-              >
-                <img
-                  src={pub.image}
-                  alt={pub.title}
-                  className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-                />
-                <div
-                  className="absolute inset-0 transition-opacity duration-300"
-                  style={{
-                    background:
-                      'linear-gradient(180deg, rgba(0, 61, 115, 0.25) 0%, rgba(0, 42, 82, 0.85) 60%, rgba(0, 29, 56, 0.98) 100%)'
-                  }}
-                />
-
-                <div className="absolute inset-0 p-6 flex flex-col justify-between text-white">
-                  <div className="flex items-center justify-between">
-                    <span className="bg-[#C5A059] text-[#0F172A] text-[10px] font-extrabold uppercase tracking-wider px-2.5 py-1 rounded-sm">
-                      {pub.category}
-                    </span>
-                    <span className="text-[11px] text-slate-200 bg-black/30 backdrop-blur-sm px-2 py-0.5 rounded-sm">
-                      {pub.date}
-                    </span>
-                  </div>
-
-                  <div>
-                    <div className="w-10 h-0.5 bg-[#C5A059] mb-3 transition-all duration-300 group-hover:w-20" />
-                    <h3 className="text-lg font-bold leading-snug mb-2 text-white group-hover:text-[#C5A059] transition-colors">
-                      {pub.title}
-                    </h3>
-                    <p className="text-xs text-slate-200 line-clamp-3 leading-relaxed mb-4">
-                      {pub.subtitle}
-                    </p>
-                    <div className="pt-3 border-t border-white/15 flex items-center justify-between text-xs font-semibold">
-                      <span className="text-slate-300">{pub.pages}</span>
-                      <span className="text-[#C5A059] flex items-center gap-1">
-                        Descargar <ExternalLink className="w-3.5 h-3.5" />
-                      </span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* 7. PALABRAS DE LA PRESIDENCIA */}
-      <section className="bg-[#003D73] text-white py-20 relative overflow-hidden">
-        <div className="absolute top-0 left-0 w-2 h-full bg-[#C5A059]" />
-
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-center">
-            <div className="lg:col-span-6 space-y-6">
-              <div className="inline-flex items-center gap-2 border border-[#C5A059]/50 bg-white/5 px-3 py-1 rounded-sm">
-                <span className="text-xs font-bold tracking-widest uppercase text-[#C5A059]">
-                  PRONUNCIAMIENTO INSTITUCIONAL
-                </span>
-              </div>
-
-              <h2 className="text-3xl sm:text-4xl font-extrabold tracking-tight text-white">
-                Palabras de la Presidencia del CONAREQF
-              </h2>
-              <div className="w-16 h-1 bg-[#C5A059]" />
-
-              <blockquote className="text-base sm:text-lg text-slate-100 leading-relaxed border-l-4 border-[#C5A059] pl-5 py-1 italic">
-                “Nuestro compromiso ineludible con la salud pública del país se refleja en un
-                Proceso de Admisión riguroso, meritocrático y transparente, asegurando que cada
-                profesional Químico Farmacéutico residente acceda a una formación clínica y
-                científica del más alto estándar internacional en beneficio directo del paciente.”
-              </blockquote>
-
-              <div className="pt-2 flex items-center justify-between border-t border-white/15">
-                <div>
-                  <p className="text-base font-bold text-white">
-                    Dr. Q.F. Carlos Alberto Mendoza Valdivia
-                  </p>
-                  <p className="text-xs text-[#C5A059] font-medium uppercase tracking-wider mt-0.5">
-                    Presidente del Comité Nacional del Residentado Químico Farmacéutico
-                  </p>
-                </div>
-                <a
-                  href="#quienes-somos"
-                  className="text-xs font-bold text-[#C5A059] hover:underline flex items-center gap-1"
-                >
-                  <span>Leer mensaje íntegro</span>
-                  <ChevronRight className="w-4 h-4" />
-                </a>
-              </div>
-            </div>
-
-            <div className="lg:col-span-6">
-              <div
-                className="relative h-[320px] sm:h-[380px] w-full rounded-sm overflow-hidden shadow-2xl border-2 border-white/15 group"
-              >
-                <img
-                  src="https://images.unsplash.com/photo-1540575467063-178a50c2df87?auto=format&fit=crop&w=1400&q=85"
-                  alt="Ceremonia Oficial del Comité Nacional del Residentado Químico Farmacéutico"
-                  className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-                />
-                <div className="absolute inset-0 bg-[#003D73]/45 group-hover:bg-[#003D73]/30 transition-colors flex flex-col items-center justify-center p-6 text-center">
-                  <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-sm bg-[#C5A059] text-[#0F172A] flex items-center justify-center shadow-lg transform transition-transform group-hover:scale-110">
-                    <Play className="w-8 h-8 fill-current ml-1" />
-                  </div>
-                  <span className="mt-4 bg-[#003D73]/90 border border-white/20 text-white text-xs font-bold uppercase tracking-wider px-4 py-1.5 rounded-sm">
-                    Ver Ceremonia de Apertura del Año Académico 2026
-                  </span>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* 8. NOTICIAS Y COMUNICADOS */}
-      <section id="admision" className="py-20 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-6">
-            <div>
-              <span className="text-xs font-bold uppercase tracking-widest text-[#C5A059] block mb-2">
-                ACTUALIDAD Y TRANSPARENCIA OFICIAL
-              </span>
-              <h2 className="text-3xl font-extrabold text-[#003D73] tracking-tight">
-                Noticias y Comunicados Destacados
-              </h2>
-              <div className="w-20 h-1 bg-[#C5A059] mt-3" />
-            </div>
-
-            <div className="flex flex-wrap items-center gap-2">
-              {['Todos', 'Admisión', 'Resoluciones', 'Comunicados', 'Normativa'].map((tab) => (
-                <button
-                  key={tab}
-                  onClick={() => setNewsFilter(tab)}
-                  className={`px-4 py-2 text-xs font-bold uppercase tracking-wider rounded-sm border transition-all ${newsFilter === tab
-                    ? 'bg-[#003D73] text-white border-[#003D73]'
-                    : 'bg-[#F8FAFC] text-[#334155] border-slate-200 hover:border-[#C5A059]'
-                    }`}
-                >
-                  {tab}
-                </button>
-              ))}
-            </div>
-          </div>
-
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
-            {featuredNews && (
-              <div className="lg:col-span-7 bg-[#F8FAFC] border border-slate-200 rounded-sm shadow-sm overflow-hidden flex flex-col justify-between group">
-                <div>
-                  <div className="relative h-[300px] sm:h-[360px] w-full overflow-hidden bg-[#003D73]">
-                    <img
-                      src={featuredNews.image}
-                      alt={featuredNews.title}
-                      className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-                    />
-                    <div className="absolute top-4 left-4 flex items-center gap-2">
-                      <span className="bg-[#003D73] text-white text-xs font-bold px-3 py-1.5 rounded-sm border-l-4 border-[#C5A059]">
-                        {featuredNews.code}
-                      </span>
-                    </div>
-                    <div className="absolute bottom-4 right-4 bg-[#C5A059] text-[#0F172A] text-xs font-extrabold px-3 py-1 rounded-sm">
-                      {featuredNews.date}
-                    </div>
-                  </div>
-
-                  <div className="p-6 sm:p-8">
-                    <span className="text-xs font-bold uppercase tracking-wider text-[#003D73] block mb-2">
-                      • {featuredNews.category}
-                    </span>
-                    <h3 className="text-xl sm:text-2xl font-extrabold text-[#003D73] leading-snug mb-3 group-hover:text-[#0F172A]">
-                      {featuredNews.title}
-                    </h3>
-                    <p className="text-sm sm:text-base text-[#334155] leading-relaxed">
-                      {featuredNews.excerpt}
-                    </p>
-                  </div>
-                </div>
-
-                <div className="px-6 sm:px-8 py-4 bg-white border-t border-slate-200 flex items-center justify-between">
-                  <span className="text-xs font-medium text-slate-500">
-                    Publicado por: {featuredNews.author}
-                  </span>
-                  <button
-                    className="text-xs sm:text-sm font-bold text-[#003D73] hover:text-[#C5A059] flex items-center gap-1.5 transition-colors"
-                  >
-                    <span>Leer comunicado completo</span>
-                    <ArrowRight className="w-4 h-4" />
-                  </button>
-                </div>
-              </div>
-            )}
-
-            <div className="lg:col-span-5 flex flex-col justify-between space-y-5">
-              <div className="space-y-5">
-                {filteredSideNews.map((item) => (
-                  <div
-                    key={item.id}
-                    className="bg-white border border-slate-200 hover:border-[#C5A059] rounded-sm shadow-sm p-4 flex flex-col sm:flex-row gap-4 transition-all group"
-                  >
-                    <div className="w-full sm:w-36 h-36 sm:h-28 rounded-sm overflow-hidden shrink-0 bg-slate-100">
-                      <img
-                        src={item.image}
-                        alt={item.title}
-                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-                      />
-                    </div>
-                    <div className="flex flex-col justify-between flex-1">
-                      <div>
-                        <div className="flex items-center justify-between gap-2 mb-1.5">
-                          <span className="text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 bg-[#F8FAFC] text-[#003D73] border border-slate-200 rounded-sm">
-                            {item.code}
-                          </span>
-                          <span className="text-[11px] font-semibold text-[#C5A059]">
-                            {item.date}
-                          </span>
-                        </div>
-                        <h4 className="text-sm font-bold text-[#003D73] group-hover:text-[#0F172A] leading-snug line-clamp-2">
-                          {item.title}
-                        </h4>
-                        <p className="text-xs text-slate-500 mt-1 line-clamp-2">{item.excerpt}</p>
-                      </div>
-                      <span className="text-xs font-bold text-[#003D73] group-hover:text-[#C5A059] inline-flex items-center gap-1 mt-2">
-                        Ver documento <ChevronRight className="w-3.5 h-3.5" />
-                      </span>
-                    </div>
-                  </div>
-                ))}
-              </div>
-
-              <div className="bg-[#F8FAFC] border border-slate-200 border-l-4 border-l-[#003D73] p-5 rounded-sm">
-                <h4 className="text-sm font-bold text-[#003D73] mb-1">
-                  Archivo Histórico de Resoluciones
-                </h4>
-                <p className="text-xs text-[#334155] mb-3">
-                  Consulte todas las resoluciones emitidas por el Comité Nacional desde su
-                  instalación.
-                </p>
-                <button
-                  className="w-full bg-[#003D73] hover:bg-[#002b52] text-white text-xs font-bold py-2.5 px-4 rounded-sm transition-colors flex items-center justify-center gap-2"
-                >
-                  <Search className="w-3.5 h-3.5 text-[#C5A059]" />
-                  <span>Acceder al Buscador Normativo</span>
-                </button>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
 
       {/* 9. MIEMBROS */}
       <section className="py-14 bg-[#F8FAFC] border-t border-slate-200">
@@ -1060,8 +788,12 @@ export default function App() {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-10">
             <div className="lg:col-span-4 space-y-4">
               <div className="flex items-center gap-3">
-                <div className="w-12 h-12 bg-white/10 rounded-sm flex items-center justify-center border border-[#C5A059]">
-                  <Landmark className="w-6 h-6 text-[#C5A059]" />
+                <div className="w-12 h-12 bg-white/95 rounded-sm flex items-center justify-center border border-[#C5A059] p-1 shrink-0">
+                  <img
+                    src={SITE_ASSETS.logo}
+                    alt={SITE_ASSETS.logoAlt}
+                    className="w-full h-full object-contain"
+                  />
                 </div>
                 <div>
                   <span className="text-xl font-extrabold tracking-tight text-white block">
@@ -1142,22 +874,22 @@ export default function App() {
               <ul className="space-y-3 text-xs sm:text-sm text-slate-200">
                 <li className="flex items-start gap-2.5">
                   <MapPin className="w-4 h-4 text-[#C5A059] shrink-0 mt-0.5" />
-                  <span>Av. Andrés Aramburú N° 818, San Isidro / Jesús María - Lima, Perú</span>
+                  <span>Lima, Perú</span>
                 </li>
                 <li className="flex items-center gap-2.5">
                   <Phone className="w-4 h-4 text-[#C5A059] shrink-0" />
-                  <span>Central Telefónica: (01) 422-8910</span>
+                  <span>Central</span>
                 </li>
                 <li className="flex items-center gap-2.5">
                   <Mail className="w-4 h-4 text-[#C5A059] shrink-0" />
-                  <a href="mailto:informes@conareqf.com.pe" className="hover:text-[#C5A059] transition-colors underline">
-                    informes@conareqf.com.pe
+                  <a href="mailto:contacto@conareqf.pe" className="hover:text-[#C5A059] transition-colors underline">
+                    correo@conareqf.pe
                   </a>
                 </li>
                 <li className="flex items-center gap-2.5">
                   <Mail className="w-4 h-4 text-[#C5A059] shrink-0" />
-                  <a href="mailto:admision@conareqf.com.pe" className="hover:text-[#C5A059] transition-colors underline">
-                    admision@conareqf.com.pe
+                  <a href="mailto:admision@conareqf.pe" className="hover:text-[#C5A059] transition-colors underline">
+                    correo@conareqf.pe
                   </a>
                 </li>
               </ul>

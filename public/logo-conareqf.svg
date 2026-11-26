@@ -1,0 +1,197 @@
+<svg width="512" height="512" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Escudo Oficial CONAREQF">
+  <title>Escudo Oficial CONAREQF - Comité Nacional del Residentado Químico Farmacéutico</title>
+  <defs>
+    <!-- Gradiente dorado institucional para la Copa de Higía -->
+    <linearGradient id="goldCupGrad" x1="33" y1="43" x2="61" y2="78" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#F5D77F"/>
+      <stop offset="45%" stop-color="#CEA64C"/>
+      <stop offset="100%" stop-color="#9E7828"/>
+    </linearGradient>
+
+    <!-- Gradiente dorado metálico para aros institucionales -->
+    <linearGradient id="goldRingGrad" x1="10" y1="10" x2="90" y2="90" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#E8CC84"/>
+      <stop offset="50%" stop-color="#C5A059"/>
+      <stop offset="100%" stop-color="#9B7732"/>
+    </linearGradient>
+
+    <!-- Clip interior del medallón -->
+    <clipPath id="medallionClip">
+      <circle cx="50" cy="50" r="40.5"/>
+    </clipPath>
+  </defs>
+
+  <!-- Aro exterior punteado dorado -->
+  <circle cx="50" cy="50" r="48.2" stroke="#C5A059" stroke-width="1.3" stroke-dasharray="3.2 2" opacity="0.9"/>
+
+  <!-- Aro institucional azul marino CONAREQF (anillo hueco para fondo 100% transparente) -->
+  <circle cx="50" cy="50" r="42.9" fill="none" stroke="#014D86" stroke-width="4.6"/>
+  <circle cx="50" cy="50" r="45.2" fill="none" stroke="url(#goldRingGrad)" stroke-width="1.4"/>
+  <circle cx="50" cy="50" r="40.6" fill="none" stroke="url(#goldRingGrad)" stroke-width="1.2"/>
+
+  <!-- Contenido institucional dentro del medallón -->
+  <g clip-path="url(#medallionClip)">
+    <!-- 1. Mapa del Perú entero en azul oscuro institucional con borde dorado -->
+    <path
+      d="M47.44 14.96 L48.81 17.71 L47.65 20.35 L43.42 24.69 L38.56 26.27 L36.55 28.07 L35.28 32.4 L33.91 34.2 L32.75 34.09 L31.37 32.08 L28.2 31.98 L28.62 31.24 L27.99 30.6 L29.36 29.86 L28.73 28.07 L25.14 31.13 L25.24 35.15 L26.62 36.31 L26.62 37.26 L25.56 37.26 L25.45 37.9 L31.16 41.6 L32.22 44.13 L35.18 47.83 L37.4 53.44 L39.51 56.5 L39.72 58.19 L45.43 66.33 L44.8 68.13 L46.17 70.77 L50.82 74.68 L63.29 81.34 L63.61 82.61 L66.89 85.14 L68.68 85.25 L69.74 83.98 L69.42 82.82 L70.59 82.18 L70.27 80.92 L72.38 78.91 L72.7 77.32 L71.22 74.89 L72.07 73.2 L71.22 71.83 L73.33 69.4 L72.38 67.07 L73.86 62.53 L70.27 56.82 L67.63 57.24 L66.46 56.5 L66.68 51.11 L64.14 53.01 L60.76 53.01 L59.91 51.11 L57.06 50.58 L57.8 49.21 L55.37 46.56 L53.89 43.29 L54.84 42.76 L54.73 40.96 L57.06 39.59 L56.63 37.79 L57.9 34.52 L60.02 32.82 L65.3 31.56 L66.57 30.6 L69.42 31.03 L68.37 29.34 L66.68 29.34 L69.0 25.0 L65.94 23.31 L64.03 23.84 L62.55 22.99 L60.33 24.26 L57.9 24.16 L55.15 19.82 L52.3 18.13 L51.88 16.44 L49.34 14.75 Z"
+      fill="#014D86"
+      stroke="#C5A059"
+      stroke-width="1.15"
+      stroke-linejoin="round"
+    />
+
+    <!-- 2. Grupo de Copa y Serpiente ligeramente reducido y centrado sobre el mapa -->
+    <g transform="translate(49.5, 53.5) scale(0.73) translate(-51, -52)">
+      <!-- Parte posterior del cuerpo de la serpiente (detrás del cuello de la copa) -->
+      <path
+        d="M42.5 55.6 C44.6 54.4 48.6 54.6 51.8 55.2"
+        stroke="#FFFFFF"
+        stroke-width="5.2"
+        stroke-linecap="round"
+      />
+      <path
+        d="M42.5 55.6 C44.6 54.4 48.6 54.6 51.8 55.2"
+        stroke="#014D86"
+        stroke-width="3.2"
+        stroke-linecap="round"
+      />
+
+      <!-- 3. Copa de Higía (Copa Farmacéutica Dorada) -->
+      <g id="copa-higia">
+        <!-- Cuerpo de la copa (tazón) -->
+        <path
+          d="M33.2 43.0
+             H61.2
+             C60.5 50.4 54.4 54.8 49.3 56.2
+             H45.1
+             C40.0 54.8 33.9 50.4 33.2 43.0 Z"
+          fill="url(#goldCupGrad)"
+          stroke="#7A5A1A"
+          stroke-width="0.9"
+          stroke-linejoin="round"
+        />
+        <!-- Borde superior luminoso -->
+        <line x1="34.0" y1="43.8" x2="60.4" y2="43.8" stroke="#FFF6D6" stroke-width="0.9" opacity="0.9"/>
+
+        <!-- Facetas azul marino características del tazón -->
+        <path d="M45.5 45.9 H48.9 L47.8 51.8 H46.6 Z" fill="#014D86"/>
+        <path d="M38.3 46.2 L41.9 50.8 L40.6 51.7 L37.0 47.1 Z" fill="#014D86"/>
+        <path d="M56.1 46.2 L52.5 50.8 L53.8 51.7 L57.4 47.1 Z" fill="#014D86"/>
+
+        <!-- Tallo y base acampanada -->
+        <path
+          d="M45.3 56.0
+             H49.1
+             V70.4
+             C49.1 72.8 53.8 74.9 57.6 76.1
+             V78.3
+             H36.8
+             V76.1
+             C40.6 74.9 45.3 72.8 45.3 70.4
+             Z"
+          fill="url(#goldCupGrad)"
+          stroke="#7A5A1A"
+          stroke-width="0.9"
+          stroke-linejoin="round"
+        />
+        <!-- Brillo sutil vertical en el tallo -->
+        <line x1="46.5" y1="57.2" x2="46.5" y2="70.8" stroke="#FFF6D6" stroke-width="0.75" opacity="0.6"/>
+
+        <!-- Detalles de sombra en la base -->
+        <circle cx="43.5" cy="75.3" r="0.85" fill="#7A5A1A" opacity="0.75"/>
+        <circle cx="50.9" cy="75.3" r="0.85" fill="#7A5A1A" opacity="0.75"/>
+      </g>
+
+      <!-- 4. Serpiente Azul Oscuro con contorno blanco nítido para máximo contraste sobre el mapa -->
+      <g id="serpiente">
+        <!-- Capa 1: Contorno blanco continuo detrás de toda la serpiente (cola, arco y cabeza) -->
+        <path
+          d="M50.2 57.8
+             C54.4 64.2 60.0 72.8 68.6 76.2
+             C71.2 77.2 73.5 77.2 74.8 76.6
+             C73.3 75.8 71.2 75.2 69.1 74.0
+             C61.6 69.9 56.8 62.2 53.2 55.8
+             Z"
+          fill="#FFFFFF"
+          stroke="#FFFFFF"
+          stroke-width="2.1"
+          stroke-linejoin="round"
+        />
+        <path
+          d="M42.4 56.6
+             C44.7 58.2 49.4 58.0 54.0 55.8
+             C62.0 52.0 68.4 45.6 68.4 37.4
+             C68.4 30.0 62.6 25.8 55.8 26.0
+             C51.6 26.1 48.8 27.8 47.6 29.8"
+          stroke="#FFFFFF"
+          stroke-width="5.9"
+          stroke-linecap="round"
+          fill="none"
+        />
+        <path
+          d="M51.2 27.0
+             C48.2 26.8 45.2 29.0 44.0 32.0
+             C46.4 32.6 49.0 32.1 50.8 30.5
+             C51.8 29.5 52.1 27.8 51.2 27.0 Z"
+          fill="#FFFFFF"
+          stroke="#FFFFFF"
+          stroke-width="2.1"
+          stroke-linejoin="round"
+        />
+
+        <!-- Capa 2: Relleno azul oscuro institucional de la serpiente -->
+        <path
+          d="M50.2 57.8
+             C54.4 64.2 60.0 72.8 68.6 76.2
+             C71.2 77.2 73.5 77.2 74.8 76.6
+             C73.3 75.8 71.2 75.2 69.1 74.0
+             C61.6 69.9 56.8 62.2 53.2 55.8
+             Z"
+          fill="#014D86"
+        />
+        <path
+          d="M42.4 56.6
+             C44.7 58.2 49.4 58.0 54.0 55.8
+             C62.0 52.0 68.4 45.6 68.4 37.4
+             C68.4 30.0 62.6 25.8 55.8 26.0
+             C51.6 26.1 48.8 27.8 47.6 29.8"
+          stroke="#014D86"
+          stroke-width="3.7"
+          stroke-linecap="round"
+          fill="none"
+        />
+        <!-- Cabeza de la serpiente -->
+        <path
+          d="M51.2 27.0
+             C48.2 26.8 45.2 29.0 44.0 32.0
+             C46.4 32.6 49.0 32.1 50.8 30.5
+             C51.8 29.5 52.1 27.8 51.2 27.0 Z"
+          fill="#014D86"
+        />
+
+        <!-- Brillo dorsal sutil -->
+        <path
+          d="M55.4 54.6
+             C62.5 51.0 67.7 44.8 67.7 37.4
+             C67.7 30.9 62.6 26.8 56.2 26.8"
+          stroke="#4F93CE"
+          stroke-width="0.85"
+          stroke-linecap="round"
+          opacity="0.55"
+          fill="none"
+        />
+
+        <!-- Ojo dorado de la serpiente -->
+        <circle cx="47.8" cy="29.4" r="0.75" fill="#F5D77F"/>
+
+        <!-- Lengua bífida dorada con halo sutil para visibilidad sobre el azul -->
+        <path
+          d="M44.4 32.1 L43.2 35.1 M43.6 34.1 L42.3 36.2 M43.6 34.1 L44.4 36.5"
+          stroke="#F5D77F"
+          stroke-width="1.0"
+          stroke-linecap="round"
+        />
+      </g>
+    </g>
+  </g>
+</svg>

@@ -243,7 +243,7 @@ export default function App() {
             </span>
             <span className="hidden sm:inline text-white/25">|</span>
             <a
-              href="https://conareqf.pe"
+              href="#"
               className="flex items-center gap-1.5 hover:text-[#C5A059] transition-colors"
             >
               <Mail className="w-3.5 h-3.5 text-[#C5A059]" />
@@ -501,7 +501,7 @@ export default function App() {
                         <span className="text-slate-700">PRÓXIMAMENTE</span>
                       </div>
                       <p className="text-xs text-slate-500 mt-0.5">
-                        Nueva experiencia web para postulantes y residentes
+                        Nueva experiencia web
                       </p>
                     </div>
                   </div>
@@ -703,12 +703,7 @@ export default function App() {
               </p>
 
               <div className="pt-2">
-                <button
-                  className="inline-flex items-center gap-2.5 bg-white/10 hover:bg-white/15 border border-white/20 px-4 py-2.5 rounded-sm text-xs font-semibold text-white transition-colors"
-                >
-                  <BookOpen className="w-4 h-4 text-[#C5A059]" />
-                  <span>Libro de Reclamaciones Digital</span>
-                </button>
+
               </div>
             </div>
 
@@ -745,16 +740,7 @@ export default function App() {
                     Perfiles de Especialidades RQF
                   </a>
                 </li>
-                <li>
-                  <a href="#admision" className="hover:text-[#C5A059] transition-colors text-left block">
-                    Inscripción en Línea (SIGERQF)
-                  </a>
-                </li>
-                <li>
-                  <a href="#admision" className="hover:text-[#C5A059] transition-colors text-left block">
-                    Verificación de Constancias
-                  </a>
-                </li>
+
               </ul>
             </div>
 
@@ -773,13 +759,13 @@ export default function App() {
                 </li>
                 <li className="flex items-center gap-2.5">
                   <Mail className="w-4 h-4 text-[#C5A059] shrink-0" />
-                  <a href="mailto:contacto@conareqf.pe" className="hover:text-[#C5A059] transition-colors underline">
+                  <a href="#" className="hover:text-[#C5A059] transition-colors underline">
                     correo@conareqf.pe
                   </a>
                 </li>
                 <li className="flex items-center gap-2.5">
                   <Mail className="w-4 h-4 text-[#C5A059] shrink-0" />
-                  <a href="mailto:admision@conareqf.pe" className="hover:text-[#C5A059] transition-colors underline">
+                  <a href="#" className="hover:text-[#C5A059] transition-colors underline">
                     correo@conareqf.pe
                   </a>
                 </li>

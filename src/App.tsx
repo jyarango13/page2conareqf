@@ -8,12 +8,8 @@ import {
   Mail,
   Clock,
   MapPin,
-  ExternalLink,
-  Search,
   Menu,
   X,
-  Play,
-  CheckCircle2,
   Building2,
   BookOpen,
   ShieldCheck,
@@ -108,102 +104,6 @@ const QUICK_CARDS = [
   }
 ];
 
-const PUBLICATIONS = [
-  {
-    id: 1,
-    category: 'ADMISIÓN 2026',
-    title: 'Prospecto y Disposiciones del Concurso Nacional de Admisión 2026',
-    subtitle: 'Requisitos, cuadro general de vacantes por modalidad libre y cautiva, y tabla de especificaciones.',
-    image:
-      'https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=1000&q=80',
-    date: 'Actualizado Oct 2026',
-    pages: '84 páginas • PDF Oficial'
-  },
-  {
-    id: 2,
-    category: 'OBSERVATORIO QF',
-    title: 'Observatorio Técnico del Residentado Químico Farmacéutico',
-    subtitle: 'Estadísticas nacionales de brechas de especialistas, distribución por regiones y rendimiento académico.',
-    image:
-      'https://images.unsplash.com/photo-1532187863486-abf9dbad1b69?auto=format&fit=crop&w=1000&q=80',
-    date: 'Informe Anual 2026',
-    pages: 'Reporte Interactivo'
-  },
-  {
-    id: 3,
-    category: 'ACREDITACIÓN',
-    title: 'Estándares de Acreditación de Sedes Docentes Hospitalarias',
-    subtitle: 'Guía técnica de evaluación de infraestructura clínica, unidades de mezclas intravenosas y farmacovigilancia.',
-    image:
-      'https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?auto=format&fit=crop&w=1000&q=80',
-    date: 'Resolución N° 018-CONAREQF',
-    pages: '56 páginas • PDF Oficial'
-  },
-  {
-    id: 4,
-    category: 'CONVENIOS INTERINSTITUCIONALES',
-    title: 'Acuerdos Marco MINSA, EsSalud y Universidades Licenciadas',
-    subtitle: 'Lineamientos de cooperación docente-asistencial para garantizar campos clínicos de alta especialización.',
-    image:
-      'https://images.unsplash.com/photo-1577962917302-cd874c4e31d2?auto=format&fit=crop&w=1000&q=80',
-    date: 'Compendio Institucional',
-    pages: '32 Convenios Activos'
-  }
-];
-
-const NEWS_DATA = [
-  {
-    id: 1,
-    featured: true,
-    category: 'Admisión',
-    date: '02 NOV 2026',
-    code: 'COMUNICADO OFICIAL N° 024-2026-CONAREQF',
-    title:
-      'Aprobación del Cuadro General de Plazas Vacantes y Sedes Docentes Habilitadas para el Proceso de Admisión 2026',
-    excerpt:
-      'El Comité Nacional del Residentado Químico Farmacéutico pone en conocimiento de la comunidad profesional y de las facultades de Farmacia y Bioquímica del país la distribución oficial de plazas en las modalidades Libre y Cautiva en establecimientos del MINSA, EsSalud y Sanidades.',
-    image:
-      'https://images.unsplash.com/photo-1587854692152-cbe660dbde88?auto=format&fit=crop&w=1400&q=85',
-    author: 'Secretaría Técnica del CONAREQF'
-  },
-  {
-    id: 2,
-    featured: false,
-    category: 'Resoluciones',
-    date: '28 OCT 2026',
-    code: 'RESOLUCIÓN N° 042-2026',
-    title:
-      'Designación del Jurado Calificador y Comité de Elaboración del Examen Único Nacional 2026',
-    excerpt: 'Protocolos de seguridad, transparencia y reserva académica para la evaluación nacional.',
-    image:
-      'https://images.unsplash.com/photo-1434030216411-0b793f4b4173?auto=format&fit=crop&w=600&q=80'
-  },
-  {
-    id: 3,
-    featured: false,
-    category: 'Comunicados',
-    date: '19 OCT 2026',
-    code: 'COMUNICADO N° 021-2026',
-    title:
-      'Acreditación de 8 nuevas sedes hospitalarias de nivel III-1 para Farmacia Clínica y Oncológica',
-    excerpt: 'Institutos especializados se incorporan a la oferta formativa del presente año académico.',
-    image:
-      'https://images.unsplash.com/photo-1586773860418-d37222d8fce3?auto=format&fit=crop&w=600&q=80'
-  },
-  {
-    id: 4,
-    featured: false,
-    category: 'Normativa',
-    date: '10 OCT 2026',
-    code: 'DIRECTIVA N° 009-2026',
-    title:
-      'Lineamientos para las rotaciones externas nacionales e internacionales de residentes de 2do y 3er año',
-    excerpt: 'Requisitos académicos y convenios vigentes para estancias formativas en el extranjero.',
-    image:
-      'https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&w=600&q=80'
-  }
-];
-
 const MEMBER_INSTITUTIONS = [
   {
     acronym: 'MINSA',
@@ -235,7 +135,6 @@ const MEMBER_INSTITUTIONS = [
 export default function App() {
   const [activeSlide, setActiveSlide] = useState(0);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [newsFilter, setNewsFilter] = useState('Todos');
   const [showConstructionModal, setShowConstructionModal] = useState(true);
 
   useEffect(() => {
@@ -253,14 +152,6 @@ export default function App() {
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
   }, [showConstructionModal]);
-
-  const filteredSideNews = NEWS_DATA.filter((item) => {
-    if (item.featured) return false;
-    if (newsFilter === 'Todos') return true;
-    return item.category.toLowerCase() === newsFilter.toLowerCase();
-  });
-
-  const featuredNews = NEWS_DATA.find((item) => item.featured);
 
 
   return (
